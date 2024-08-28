@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Click Circles</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('background.png');
+            /* 背景圖 */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .button-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 5px solid;
+            pointer-events: none;
+            /* 使圈圈不可點擊 */
+        }
+
+        .disabled {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="button-container">
+        <!-- 預測按鈕位置 -->
+        <button style="top: 12%; left: 14%;" onclick="handleClick(this)"></button>
+        <button style="top: 7%; left: 55%;" onclick="handleClick(this)"></button>
+        <button style="top: 18%; left: 80%;" onclick="handleClick(this)"></button>
+        <button style="top: 13%; left: 27%;" onclick="handleClick(this)"></button>
+        <button style="top: 12%; left: 69%;" onclick="handleClick(this)"></button>
+        <button style="top: 40%; left: 52%;" onclick="handleClick(this)"></button>
+        <button style="top: 42%; left: 26%;" onclick="handleClick(this)"></button>
+        <button style="top: 37%; left: 65%;" onclick="handleClick(this)"></button>
+        <button style="top: 50%; left: 13%;" onclick="handleClick(this)"></button>
+        <button style="top: 51%; left: 39%;" onclick="handleClick(this)"></button>
+        <button style="top: 65%; left: 66%;" onclick="handleClick(this)"></button>
+        <button style="top: 27%; left: 40%;" onclick="handleClick(this)"></button>
+        <button style="top: 53%; left: 79%;" onclick="handleClick(this)"></button>
+        <button style="top: 81%; left: 12.5%;" onclick="handleClick(this)"></button>
+        <button style="top: 6%; left: 42.5%;" onclick="handleClick(this)"></button>
+        <button style="top: 82%; left: 37%;" onclick="handleClick(this)"></button>
+        <button style="top: 76%; left: 54%;" onclick="handleClick(this)"></button>
+        <button style="top: 77%; left: 26%;" onclick="handleClick(this)"></button>
+        <button style="top: 83%; left: 76%;" onclick="handleClick(this)"></button>
+    </div>
+
+    <script>
+        let clickCount = 0;
+
+        function handleClick(button) {
+            // 防止重複點擊
+            if (button.classList.contains('disabled')) return;
+
+            clickCount++;
+
+            // 計算圈圈顏色
+            const color = clickCount % 2 === 0 ? 'blue' : 'red';
+
+            // 創建圈圈
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            circle.style.borderColor = color;
+            circle.style.top = button.offsetTop + 'px';
+            circle.style.left = button.offsetLeft + 'px';
+
+            // 禁用按鈕
+            button.classList.add('disabled');
+
+            // 添加圈圈到頁面
+            document.body.appendChild(circle);
+        }
+    </script>
+
+</body>
+
+</html>
